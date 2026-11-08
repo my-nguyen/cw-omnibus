@@ -1,28 +1,39 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+}
 
 android {
-    compileSdkVersion 25
-    
+    namespace 'com.commonsware.empublite'
+    compileSdk 35
+
     defaultConfig {
         applicationId "com.commonsware.empublite"
-        minSdkVersion 15
-        targetSdkVersion 25
+        minSdk 21
+        targetSdk 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        vectorDrawables.generatedDensities = ['hdpi','xxhdpi']
+        vectorDrawables.generatedDensities = ['hdpi', 'xxhdpi']
     }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-}
 
-repositories {
-    maven {
-        url "https://s3.amazonaws.com/repo.commonsware.com"
+    lint {
+        abortOnError false
     }
 }
 
